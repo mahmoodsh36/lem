@@ -76,7 +76,11 @@
 
             configurePhase = ''
               runHook preConfigure
-              export ASDF_IGNORE_TIMESTAMP=1
+              export ASDF_CONFIG_FILE="$(pwd)/my-asdfrc"
+              cat > "$ASDF_CONFIG_FILE" <<EOF
+              (eval-when (:load-toplevel :compile-toplevel :execute)
+                (setf asdf:*check-source-modification-times* nil))
+              EOF
               mkdir -p $out/share/lem
               pushd $out/share/lem
                 cp -r $qlBundleLibs .bundle-libs
