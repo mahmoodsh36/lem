@@ -76,6 +76,7 @@
 
             configurePhase = ''
               runHook preConfigure
+              export ASDF_IGNORE_TIMESTAMP=1
               mkdir -p $out/share/lem
               pushd $out/share/lem
                 cp -r $qlBundleLibs .bundle-libs
