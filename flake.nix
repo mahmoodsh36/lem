@@ -111,6 +111,9 @@
                 '(:output-translations :disable-cache
                                        :inherit-configuration))
 
+              ;; disable source timestamp checking
+              (setf asdf:*check-source-modification-times* nil)
+
               (defvar *systems* (uiop:split-string (uiop:getenv "systems")))
               (defvar *out-path* (uiop:getenv "out"))
               (defvar *share-path* (concatenate 'string
