@@ -32,6 +32,7 @@
                "split-sequence"
                "str"
                "dexador"
+               "cltpt"
                ;; "lem-encodings"
                #+sbcl
                sb-concurrency
