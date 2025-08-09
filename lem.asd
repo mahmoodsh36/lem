@@ -33,6 +33,7 @@
                "str"
                "dexador"
                "cl-mustache"
+               "cltpt"
                ;; "lem-encodings"
                #+sbcl
                sb-concurrency
