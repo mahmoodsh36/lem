@@ -5,7 +5,7 @@
 ("uiop" .
  (:class qlot/source/ql:source-ql
   :initargs (:%version :latest)
-  :version "ql-2024-10-12"))
+  :version "ql-2025-06-22"))
 ("micros" .
  (:class qlot/source/git:source-git
   :initargs (:remote-url "https://github.com/lem-project/micros.git")
@@ -49,4 +49,8 @@
 ("webview" .
  (:class qlot/source/git:source-git
   :initargs (:remote-url "https://github.com/lem-project/webview.git")
-  :version "git-291194f510ec8755280d2561872f8260a43bde28"))
+  :version "git-9053b5ad7d17c264f4bb276250cd4ab4b2354834"))
+("cltpt" .
+ (:class qlot/source/git:source-git
+  :initargs (:remote-url "https://github.com/mahmoodsh36/cltpt")
+  :version "git-8272492ae96ebe0b4c81581304b448fd0a5f17ba"))
