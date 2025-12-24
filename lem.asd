@@ -33,6 +33,7 @@
                "dexador"
                "cl-mustache"
                ;; "lem-encodings"
+               "cltpt"
                #+sbcl
                sb-concurrency
                "lem-mailbox"
@@ -297,6 +298,7 @@
                "lem-copilot"
                "lem-claude-code"
                "lem-bookmark"
+               "organ-mode"
                "lem-mcp-server"
                "lem-transient"
                #+sbcl
