@@ -473,6 +473,7 @@
    :keymap*
    :*root-keymap*
    :prefix-active-p
+   :prefix-behavior
    :keymap-name
    :keymap-children
    :keymap-properties
@@ -537,6 +538,7 @@
    :*input-hook*
    :meta-prefix-keys
    :last-read-key-sequence
+   :with-last-read-key-sequence
    :start-record-key
    :stop-record-key
    :key-recording-p
