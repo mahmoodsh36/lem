@@ -1047,6 +1047,8 @@ You can pass in the optional argument WINDOW-LIST to replace the default
     (window-set-size window (display-width) 1))
   (alexandria:when-let (window (frame-rightside-window (current-frame)))
     (resize-rightside-window window))
+  (alexandria:when-let (window (frame-bottomside-window (current-frame)))
+    (resize-bottomside-window window (window-height window)))
   (balance-windows))
 
 (defun update-on-display-resized ()
