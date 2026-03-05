@@ -53,11 +53,11 @@
 ("cltpt" .
  (:class qlot/source/git:source-git
   :initargs (:remote-url "https://github.com/mahmoodsh36/cltpt")
-  :version "git-6f486cbe501fb6013c55e22b5c46d81f31300225"))
+  :version "git-b87e82b7c8d71650d4de4a7f9ada453bcafbc0e2"))
 ("organ-mode" .
  (:class qlot/source/git:source-git
   :initargs (:remote-url "https://github.com/mahmoodsh36/organ-mode")
-  :version "git-fe825feb9a201fc9e699d8a2de705c478b8d65ba"))
+  :version "git-70116210af61e0052edf22b64a11febc4359335d"))
 ("tree-sitter-cl" .
  (:class qlot/source/git:source-git
   :initargs (:remote-url "https://github.com/lem-project/tree-sitter-cl.git")
