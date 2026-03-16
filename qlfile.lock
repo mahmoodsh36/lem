@@ -61,7 +61,7 @@
 ("organ-mode" .
  (:class qlot/source/git:source-git
   :initargs (:remote-url "https://github.com/mahmoodsh36/organ-mode")
-  :version "git-62c4da02172ccd9a3ba0f49def1eb0d8dd78690e"))
+  :version "git-7ba39adbc7e61d03a61b2a5e64cd862ca11eea57"))
 ("tree-sitter-cl" .
  (:class qlot/source/git:source-git
   :initargs (:remote-url "https://github.com/lem-project/tree-sitter-cl.git")
