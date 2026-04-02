@@ -43,7 +43,8 @@
                (:module "mcp-server"
                 :components ((:file "utils")
                              (:file "integration-tests")
-                             (:file "edge-case-tests")))
+                             (:file "edge-case-tests")
+                             (:file "display-input-tests")))
                (:module "lisp-syntax"
                 :components ((:file "indent-test")
                              (:file "defstruct-to-defclass")))
@@ -63,6 +64,7 @@
                (:file "isearch")
                (:file "self-insert-command")
                (:file "interp")
+               (:file "input")
                (:file "file")
                (:file "scala-mode")
                (:file "wat-mode")
@@ -71,6 +73,7 @@
                (:file "completion")
                (:file "command-line-arguments")
                (:file "window")
-               (:file "legit"))
+               (:file "legit")
+               (:file "filer"))
   :perform (test-op (o c)
                     (symbol-call :rove :run c)))

@@ -303,14 +303,15 @@
                #+sbcl
                "lem-living-canvas"
                "lem-tree-sitter"
-               "lem-git-gutter"))
+               "lem-git-gutter"
+               "lem-skk-mode"))
 
 (defsystem "lem"
   :version "2.3.0"
   :defsystem-depends-on ("deploy")
   :build-operation #+os-macosx "osx-app-deploy-op" #-os-macosx "deploy-op"
   :build-pathname "lem"
-  :entry-point "lem-webview:main"
+  :entry-point "lem:main"
   :depends-on ("lem-webview"
                "lem-server"
                #+(and os-unix (not os-macosx)) ; workaround: because (adf:make :lem) fails
