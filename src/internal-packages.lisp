@@ -641,7 +641,8 @@
    :init-at-build-time
    :lem
    :launch
-   :main)
+   :main
+   :get-preferred-init-file-path)
   ;; command-advices.lisp
   (:export
    :movable-advice
