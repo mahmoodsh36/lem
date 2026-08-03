@@ -843,6 +843,7 @@
    :cell-width
    :cell-height
    :cell-pixel-size
+   :font-em-pixels
    :clear-to-end-of-window
    :js-eval
    :render-row
