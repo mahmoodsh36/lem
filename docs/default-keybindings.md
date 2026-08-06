@@ -1,23 +1,23 @@
 ## Move
 | Command                                                                                                       | Key bindings  | Documentation                                         |
 |---------------------------------------------------------------------------------------------------------------|---------------|-------------------------------------------------------|
-| [next-line](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L66)                          | Down, C-n     | Move the cursor to next line.                         |
-| [next-logical-line](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L73)                  |               | Move the cursor to the next logical line.             |
-| [previous-line](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L80)                      | Up, C-p       | Move the cursor to the previous line.                 |
-| [previous-logical-line](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L84)              |               | Move the cursor to the previous logical line.         |
-| [forward-char](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L88)                       | Right, C-f    | Move the cursor to the next character.                |
-| [backward-char](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L94)                      | Left, C-b     | Move the cursor to the previous character.            |
-| [move-to-beginning-of-buffer](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L99)        | C-Home, M-<   | Move the cursor to the beginning of the buffer.       |
-| [move-to-end-of-buffer](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L104)             | C-End, M->    | Move the cursor to the end of the buffer.             |
-| [move-to-beginning-of-line](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L109)         | Home, C-a     | Move the cursor to the beginning of the line.         |
-| [move-to-beginning-of-logical-line](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L125) |               | Move the cursor to the beginning of the logical line. |
-| [move-to-end-of-line](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L129)               | End, C-e      | Move the cursor to the end of the line.               |
-| [move-to-end-of-logical-line](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L135)       |               | Move the cursor to the end of the logical line.       |
-| [next-page](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L139)                         | PageDown, C-v | Move the cursor to the next page by one page.         |
-| [previous-page](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L147)                     | PageUp, M-v   | Move the cursor to the previous page by one page.     |
-| [next-page-char](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L155)                    | C-x ]         | Move the cursor to the next page character (^L).      |
-| [previous-page-char](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L165)                | C-x [         | Move the cursor to the previous page character (^L).  |
-| [goto-line](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L169)                         | M-g           | Move the cursor to the specified line number.         |
+| [next-line](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L106)                         | Down, C-n     | Move the cursor to next line.                         |
+| [next-logical-line](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L113)                 |               | Move the cursor to the next logical line.             |
+| [previous-line](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L120)                     | Up, C-p       | Move the cursor to the previous line.                 |
+| [previous-logical-line](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L124)             |               | Move the cursor to the previous logical line.         |
+| [forward-char](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L128)                      | Right, C-f    | Move the cursor to the next character.                |
+| [backward-char](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L134)                     | Left, C-b     | Move the cursor to the previous character.            |
+| [move-to-beginning-of-buffer](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L139)       | C-Home, M-<   | Move the cursor to the beginning of the buffer.       |
+| [move-to-end-of-buffer](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L144)             | C-End, M->    | Move the cursor to the end of the buffer.             |
+| [move-to-beginning-of-line](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L149)         | Home, C-a     | Move the cursor to the beginning of the line.         |
+| [move-to-beginning-of-logical-line](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L165) |               | Move the cursor to the beginning of the logical line. |
+| [move-to-end-of-line](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L169)               | End, C-e      | Move the cursor to the end of the line.               |
+| [move-to-end-of-logical-line](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L175)       |               | Move the cursor to the end of the logical line.       |
+| [next-page](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L179)                         | PageDown, C-v | Move the cursor to the next page by one page.         |
+| [previous-page](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L187)                     | PageUp, M-v   | Move the cursor to the previous page by one page.     |
+| [next-page-char](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L195)                    | C-x ]         | Move the cursor to the next page character (^L).      |
+| [previous-page-char](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L205)                | C-x [         | Move the cursor to the previous page character (^L).  |
+| [goto-line](https://github.com/lem-project/lem/blob/main/src/commands/move.lisp#L209)                         | M-g           | Move the cursor to the specified line number.         |
 
 ## Edit
 | Command                                                                                                | Key bindings      | Documentation                                                                                                                                                                                                |
