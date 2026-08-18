@@ -131,8 +131,8 @@
 
 (defun item-name (item)
   (or (item-content item)
-      (namestring (enough-namestring (item-pathname item)
-                                     (item-directory item)))))
+      (uiop:native-namestring (uiop:enough-pathname (item-pathname item)
+                                                    (item-directory item)))))
 
 (defun human-readable-file-size (size)
   (loop :for sign :in '(#\Y #\Z #\E #\P #\T #\G #\M #\k)
