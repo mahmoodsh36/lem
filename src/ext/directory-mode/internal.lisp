@@ -191,7 +191,8 @@
   (let ((name (item-name item))
         (pathname (item-pathname item)))
     (unless (string= name "..")
-      (insert-icon point name))
+      ;; the pathname, not the name: insert-icon parses its argument as one
+      (insert-icon point pathname))
     (insert-string point
                    name
                    :attribute (get-file-attribute pathname)
