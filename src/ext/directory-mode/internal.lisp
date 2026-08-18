@@ -25,6 +25,7 @@
            :get-mark
            :filter-marks
            :get-name
+           :display-name
            :marked-lines
            :marked-files
            :get-pathname
@@ -129,10 +130,13 @@
   pathname
   content)
 
+(defun display-name (pathname &optional (directory (uiop:pathname-directory-pathname pathname)))
+  "PATHNAME as a directory buffer lists it, relative to DIRECTORY."
+  (uiop:native-namestring (uiop:enough-pathname pathname directory)))
+
 (defun item-name (item)
   (or (item-content item)
-      (uiop:native-namestring (uiop:enough-pathname (item-pathname item)
-                                                    (item-directory item)))))
+      (display-name (item-pathname item) (item-directory item))))
 
 (defun human-readable-file-size (size)
   (loop :for sign :in '(#\Y #\Z #\E #\P #\T #\G #\M #\k)
