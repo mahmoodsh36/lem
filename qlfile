@@ -11,4 +11,6 @@ git jsonrpc https://github.com/cxxxr/jsonrpc.git
 git named-readtables https://github.com/melisgl/named-readtables.git
 git lem-extension-manager https://github.com/lem-project/lem-extension-manager.git
 git webview https://github.com/lem-project/webview.git
+git cltpt https://github.com/mahmoodsh36/cltpt
+git organ-mode https://github.com/mahmoodsh36/organ-mode
 git tree-sitter-cl https://github.com/lem-project/tree-sitter-cl.git

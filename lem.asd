@@ -32,6 +32,7 @@
                "str"
                "dexador"
                "cl-mustache"
+               "cltpt"
                ;; "lem-encodings"
                #+sbcl
                sb-concurrency
@@ -300,6 +301,7 @@
                "lem-copilot"
                "lem-claude-code"
                "lem-bookmark"
+               "organ-mode"
                "lem-mcp-server"
                "lem-transient"
                #+sbcl
