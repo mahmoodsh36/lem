@@ -361,14 +361,14 @@ class BaseSurface {
 }
 
 class CanvasSurface extends BaseSurface {
-  constructor({ editor, view, pixelX, pixelY, pixelWidth, pixelHeight,
+  constructor({ editor, view, x, y, width, height,
                 styles, isFloating, border, cssClassName }) {
     super({ editor });
 
     const canvas = this.setupCanvas(styles);
     this.setupDOM({ dom: canvas, isFloating, border, cssClassName });
-    this.move(pixelX, pixelY);
-    this.resize(pixelWidth, pixelHeight);
+    this.move(x, y);
+    this.resize(width, height);
 
     this.drawingQueue = [];
 
@@ -573,7 +573,7 @@ class CanvasSurface extends BaseSurface {
 }
 
 class HTMLSurface extends BaseSurface {
-  constructor({ editor, pixelX, pixelY, pixelWidth, pixelHeight,
+  constructor({ editor, x, y, width, height,
                 styles, option, isFloating, border, html }) {
     super({ editor });
 
@@ -592,8 +592,8 @@ class HTMLSurface extends BaseSurface {
 
     this.iframe = iframe;
 
-    this.move(pixelX, pixelY);
-    this.resize(pixelWidth, pixelHeight);
+    this.move(x, y);
+    this.resize(width, height);
   }
 
   resize(width, height) {
@@ -711,10 +711,6 @@ class View {
     y,
     width,
     height,
-    pixelX,
-    pixelY,
-    pixelWidth,
-    pixelHeight,
     useModeline,
     kind,
     type,
@@ -730,10 +726,6 @@ class View {
     this.y = y;
     this.width = width;
     this.height = height;
-    this.pixelX = pixelX;
-    this.pixelY = pixelY;
-    this.pixelWidth = pixelWidth;
-    this.pixelHeight = pixelHeight;
     this.useModeline = useModeline;
     this.kind = kind;
     this.type = type;
@@ -748,18 +740,18 @@ class View {
       case 'tile':
         this.mainSurface = this.makeSurface(type, content);
         this.leftSideBar = new VerticalBorder({
-          x: pixelX,
-          y: pixelY,
-          height: pixelHeight + (useModeline ? option.fontHeight : 0),
+          x: x,
+          y: y,
+          height: height + (useModeline ? option.fontHeight : 0),
           option: option,
           editor: editor,
         });
         if (!useModeline) {
           this.bottomBar = new HorizontalBorder({
-            x: pixelX,
+            x: x,
             // along the last row of the view, not below it.
-            y: pixelY + pixelHeight - option.fontHeight,
-            width: pixelWidth,
+            y: y + height - option.fontHeight,
+            width: width,
             option: option,
             editor: editor,
           });
@@ -772,9 +764,9 @@ class View {
         this.mainSurface = this.makeSurface(type, content);
         if (borderShape === 'left-border') {
           this.leftSideBar = new VerticalBorder({
-            x: pixelX,
-            y: pixelY,
-            height: pixelHeight,
+            x: x,
+            y: y,
+            height: height,
             option: option,
             editor: editor,
           });
@@ -798,39 +790,35 @@ class View {
     }
   }
 
-  move(x, y, pixelX, pixelY) {
+  move(x, y) {
     this.x = x;
     this.y = y;
-    this.pixelX = pixelX;
-    this.pixelY = pixelY;
 
-    this.mainSurface.move(pixelX, pixelY);
+    this.mainSurface.move(x, y);
     if (this.modelineSurface) {
-      this.modelineSurface.move(pixelX, pixelY + this.pixelHeight);
+      this.modelineSurface.move(x, y + this.height);
     }
     if (this.leftSideBar) {
-      this.leftSideBar.move(pixelX, pixelY);
+      this.leftSideBar.move(x, y);
     }
     if (this.bottomBar) {
-      this.bottomBar.move(pixelX, pixelY + this.pixelHeight);
+      this.bottomBar.move(x, y + this.height);
     }
   }
 
-  resize(width, height, pixelWidth, pixelHeight) {
+  resize(width, height) {
     this.width = width;
     this.height = height;
-    this.pixelWidth = pixelWidth;
-    this.pixelHeight = pixelHeight;
-    this.mainSurface.resize(pixelWidth, pixelHeight);
+    this.mainSurface.resize(width, height);
     if (this.modelineSurface) {
-      this.modelineSurface.move(this.pixelX, this.pixelY + pixelHeight);
-      this.modelineSurface.resize(pixelWidth, this.option.fontHeight);
+      this.modelineSurface.move(this.x, this.y + height);
+      this.modelineSurface.resize(width, this.option.fontHeight);
     }
     if (this.leftSideBar) {
-      this.leftSideBar.resize(pixelHeight + (this.modelineSurface ? this.option.fontHeight : 0));
+      this.leftSideBar.resize(height + (this.modelineSurface ? this.option.fontHeight : 0));
     }
     if (this.bottomBar) {
-      this.bottomBar.resize(pixelWidth);
+      this.bottomBar.resize(width);
     }
   }
 
@@ -838,11 +826,11 @@ class View {
     this.mainSurface.drawBlock(
       0,
       0,
-      this.pixelWidth,
-      this.pixelHeight,
+      this.width,
+      this.height,
       this.option.background,
     );
-    this.mainSurface.clearImages(0, this.pixelHeight);
+    this.mainSurface.clearImages(0, this.height);
   }
 
   clearEol(x, y, height) {
@@ -850,7 +838,7 @@ class View {
     this.mainSurface.drawBlock(
       x,
       y,
-      this.pixelWidth - x,
+      this.width - x,
       height,
       this.option.background,
     );
@@ -861,11 +849,11 @@ class View {
     this.mainSurface.drawBlock(
       x, // x === 0
       y,
-      this.pixelWidth,
-      this.pixelHeight - y,
+      this.width,
+      this.height - y,
       this.option.background,
     );
-    this.mainSurface.clearImages(y, this.pixelHeight);
+    this.mainSurface.clearImages(y, this.height);
   }
 
   print(x, y, text, textWidth, attribute, font, backgroundY, backgroundHeight) {
@@ -893,8 +881,8 @@ class View {
     }
   }
 
-  printImage(x, y, pixelWidth, pixelHeight, clipWidth, clipHeight, url) {
-    this.mainSurface.drawImage(x, y, pixelWidth, pixelHeight, clipWidth, clipHeight, url);
+  printImage(x, y, width, height, clipWidth, clipHeight, url) {
+    this.mainSurface.drawImage(x, y, width, height, clipWidth, clipHeight, url);
   }
 
   printToModeline(x, y, text, textWidth, attribute, backgroundY, backgroundHeight) {
@@ -938,10 +926,10 @@ class View {
   makeHTMLSurface(content) {
     return new HTMLSurface({
       editor: this.editor,
-      pixelX: this.pixelX,
-      pixelY: this.pixelY,
-      pixelWidth: this.pixelWidth,
-      pixelHeight: this.pixelHeight,
+      x: this.x,
+      y: this.y,
+      width: this.width,
+      height: this.height,
       styles: getViewStyle(this.kind, this.option),
       option: this.option,
       isFloating: this.kind === 'floating',
@@ -956,10 +944,10 @@ class View {
 
     return new CanvasSurface({
       option: this.editor.option,
-      pixelX: this.pixelX,
-      pixelY: this.pixelY,
-      pixelWidth: this.pixelWidth,
-      pixelHeight: this.pixelHeight,
+      x: this.x,
+      y: this.y,
+      width: this.width,
+      height: this.height,
       styles: getViewStyle(this.kind, this.option),
       editor: this.editor,
       border,
@@ -972,10 +960,10 @@ class View {
   makeModelineSurface() {
     const surface = new CanvasSurface({
       option: this.editor.option,
-      pixelX: this.pixelX,
-      pixelY: this.pixelY + this.pixelHeight,
-      pixelWidth: this.pixelWidth,
-      pixelHeight: this.option.fontHeight,
+      x: this.x,
+      y: this.y + this.height,
+      width: this.width,
+      height: this.option.fontHeight,
       editor: this.editor,
       view: this,
       styles: { zIndex: zindex('modeline') },
@@ -1412,7 +1400,7 @@ export class Editor {
     element.style.backgroundColor = color;
   }
 
-  makeView({ id, x, y, width, height, pixelX, pixelY, pixelWidth, pixelHeight, use_modeline, kind, type, content, border, border_shape }) {
+  makeView({ id, x, y, width, height, use_modeline, kind, type, content, border, border_shape }) {
     const view = new View({
       option: this.option,
       id: id,
@@ -1420,10 +1408,6 @@ export class Editor {
       y: y,
       width: width,
       height: height,
-      pixelX: pixelX,
-      pixelY: pixelY,
-      pixelWidth: pixelWidth,
-      pixelHeight: pixelHeight,
       useModeline: use_modeline,
       kind: kind,
       type: type,
@@ -1441,19 +1425,19 @@ export class Editor {
     this.viewMap.delete(id);
   }
 
-  resize({ viewInfo: { id }, width, height, pixelWidth, pixelHeight }) {
+  resize({ viewInfo: { id }, width, height }) {
     const view = this.findViewById(id);
     if (view) {
-      view.resize(width, height, pixelWidth, pixelHeight);
+      view.resize(width, height);
     } else {
       console.warn(`resize: view not found for id ${id}`);
     }
   }
 
-  move({ viewInfo: { id }, x, y, pixelX, pixelY }) {
+  move({ viewInfo: { id }, x, y }) {
     const view = this.findViewById(id);
     if (view) {
-      view.move(x, y, pixelX, pixelY);
+      view.move(x, y);
     } else {
       console.warn(`move: view not found for id ${id}`);
     }
@@ -1494,9 +1478,9 @@ export class Editor {
     view.drawBlockOnModeline(x, y, width, height, color);
   }
 
-  putImage({ viewInfo: { id }, x, y, pixelWidth, pixelHeight, clipWidth, clipHeight, url }) {
+  putImage({ viewInfo: { id }, x, y, width, height, clipWidth, clipHeight, url }) {
     const view = this.findViewById(id);
-    view.printImage(x, y, pixelWidth, pixelHeight, clipWidth, clipHeight, url);
+    view.printImage(x, y, width, height, clipWidth, clipHeight, url);
   }
 
   modelinePut({ viewInfo: { id }, x, y, text, textWidth, attribute, backgroundY, backgroundHeight }) {
@@ -1511,8 +1495,8 @@ export class Editor {
     const view = this.findViewById(id);
     const [x0, y0] = this.getDisplayRectangle();
     // x and y are pixels within the view. the view's own origin is in pixels too.
-    const left = view.pixelX + x;
-    const top = view.pixelY + y;
+    const left = view.x + x;
+    const top = view.y + y;
     this.input.move(left, top);
 
     const cursorColor = color || this.option.foreground;
