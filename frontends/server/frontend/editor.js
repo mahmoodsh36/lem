@@ -33,7 +33,7 @@ function computeFontSize(font) {
 
   return [
     Math.floor(textMetrics.width),
-    Math.round(textMetrics.fontBoundingBoxAscent + (textMetrics.emHeightDescent || 0)),
+    Math.round(textMetrics.fontBoundingBoxAscent + textMetrics.fontBoundingBoxDescent),
     Math.round(textMetrics.fontBoundingBoxAscent),
   ];
 }

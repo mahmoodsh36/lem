@@ -147,11 +147,21 @@
    :set-attribute-reverse
    :set-attribute-bold
    :set-attribute-underline
+   :set-attribute-underline-style
+   :set-attribute-italic
+   :set-attribute-strikethrough
+   :set-attribute-dim
+   :set-attribute-link
    :attribute-foreground
    :attribute-background
    :attribute-reverse
    :attribute-bold
    :attribute-underline
+   :attribute-underline-style
+   :attribute-italic
+   :attribute-strikethrough
+   :attribute-dim
+   :attribute-link
    :get-attribute-cache
    :define-attribute
    :cursor
@@ -646,7 +656,8 @@
    :make-fake-cursor
    :delete-fake-cursor
    :merge-cursor-killrings
-   :clear-cursors)
+   :clear-cursors
+   :when-real-cursor)
   ;; typeout.lisp
   (:export
    :*typeout-mode-keymap*

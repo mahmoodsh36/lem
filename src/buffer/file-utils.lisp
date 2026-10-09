@@ -38,7 +38,7 @@
             :do (return
                   (if (= start (length filename))
                       (make-pathname :directory path :host host)
-                      (let ((name (subseq filename start)))
+                      (let ((name (uiop:parse-native-namestring (subseq filename start))))
                         (make-pathname :name (pathname-name name)
                                        :type (pathname-type name)
                                        :directory path
@@ -55,8 +55,9 @@
                         (t
                          (setf path (append path (list name))))))))))
 
+;; FILENAME is a native path (pathname or unescaped string), the result is a lisp namestring.
 (defun expand-file-name (filename &optional (directory (uiop:getcwd)))
-  (when (pathnamep filename) (setf filename (namestring filename)))
+  (when (pathnamep filename) (setf filename (uiop:native-namestring filename)))
   (%call-virtual-handlers *virtual-expand-file-name-functions*
       (list filename directory)
     (lambda ()
@@ -94,15 +95,38 @@
   (sort (copy-list pathnames)
         test :key key))
 
-(defun sort-files-with-method (files &key (sort-method :pathname))
-  "Sort files with a sort method, one of :pathname and :mtime."
-  (cond
-    ((eql sort-method :mtime)
-     (sort-files files :test #'> :key #'file-mtime))
-    ((eql sort-method :size)
-     (sort-files files :test #'> :key #'file-size))
-    (t
-     (sort-files files))))
+(defun sort-files-with-method (files &key (sort-method :pathname) reverse)
+  "Sort files with a SORT-METHOD, one of :pathname (default), :mtime, :size and :extension.
+
+  For :pathname sort from A to Z, otherwise by descending order (biggest files first, most recent files first).
+
+  REVERSE: boolean."
+  (let ((sorted
+          (cond
+            ((eql sort-method :mtime)
+             (sort-files files :test #'> :key #'file-mtime))
+            ((eql sort-method :size)
+             (sort-files files :test #'> :key #'file-size))
+            ((eql sort-method :extension)
+             (sort-files files :test
+                         #+sbcl
+                         #'sb-unicode:unicode<
+                         #-sbcl
+                         #'string<
+                         :key (lambda (x)
+                                (or (pathname-type x) ""))))
+            (t
+             (let ((pathname-test
+                     ;; Correctly sort words starting with an uppercase letter or an accent.
+                     #+sbcl
+                     #'sb-unicode:unicode<
+                     ;; Uppercased words appear first, an accent is sorted last.
+                     #-sbcl
+                     #'string<))
+               (sort-files files :test pathname-test :key #'namestring))))))
+    (if reverse
+        (reverse sorted)
+        sorted)))
 
 (defun directory-files (pathspec)
   (%call-virtual-handlers *virtual-directory-files-functions*
@@ -114,15 +138,17 @@
                       (directory pathspec))
               (list pathspec))))))
 
-(defun list-directory (directory &key directory-only (sort-method :pathname))
+(defun list-directory (directory &key directory-only (sort-method :pathname) sort-reverse)
   (delete nil
           (mapcar (lambda (x) (and (virtual-probe-file x directory) x))
                   (append (sort-files-with-method
                            (copy-list (uiop:subdirectories directory))
-                           :sort-method sort-method)
+                           :sort-method sort-method
+                           :reverse sort-reverse)
                           (unless directory-only
                             (sort-files-with-method (uiop:directory-files directory)
-                                                    :sort-method sort-method))))))
+                                                    :sort-method sort-method
+                                                    :reverse sort-reverse))))))
 
 (defun file-size (pathname)
   (or (loop :for f :in *virtual-file-metadata-functions*
