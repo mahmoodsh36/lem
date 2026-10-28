@@ -628,7 +628,7 @@
    :editor-output-stream
    :make-editor-output-stream
    :make-editor-io-stream)
-  ;; comp.lisp
+  ;; completion.lisp
   (:export
    :*file-completion-ignore-case*
    :completion
@@ -637,7 +637,8 @@
    :completion-file
    :completion-strings
    :completion-files
-   :completion-buffer)
+   :completion-buffer
+   :fuzzy-match-p)
   ;; cursors.lisp
   (:export
    :push-buffer-point

@@ -215,6 +215,7 @@
                                            (:file "mode")
                                            (:file "internal")
                                            (:file "commands")
+                                           (:file "writable-directory")
                                            (:file "keybinds")
                                            (:file "main")))
                              (:file "abbrev")
@@ -235,6 +236,7 @@
 
 (defsystem "lem/extensions"
   :depends-on (#+sbcl
+               "lem-template"
                "lem-welcome"
                "lem-lsp-mode"
                "lem-vi-mode"
@@ -313,7 +315,8 @@
                "lem-skk-mode"
                "lem-emacs-help-mode"
                "lem-display-time-mode"
-               "lem-tramp"))
+               "lem-tramp"
+               "lem-winner-mode"))
 
 (defsystem "lem"
   :version "2.3.0"
